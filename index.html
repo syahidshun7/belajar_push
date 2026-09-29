@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Portfolio - Retro Edition</title>
+    <!-- Tailwind CSS for utility styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Press Start 2P for authentic retro arcade typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        pixel: ['"Press Start 2P"', 'monospace'],
+                        vt: ['"VT323"', 'monospace'],
+                    },
+                    colors: {
+                        retro: {
+                            bg: '#0c0c14',
+                            card: '#161625',
+                            border: '#3b3b5c',
+                            neonGreen: '#00ff66',
+                            neonPink: '#ff007f',
+                            neonCyan: '#00ffff',
+                            neonYellow: '#ffe600',
+                            purple: '#9d00ff'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0c0c14;
+            color: #ffffff;
+            image-rendering: pixelated;
+        }
+
+        /* Custom Pixel Borders */
+        .pixel-box {
+            box-shadow: 
+                -4px 0 0 0 #3b3b5c,
+                4px 0 0 0 #3b3b5c,
+                0 -4px 0 0 #3b3b5c,
+                0 4px 0 0 #3b3b5c,
+                -8px 0 0 0 #0c0c14,
+                8px 0 0 0 #0c0c14,
+                0 -8px 0 0 #0c0c14,
+                0 8px 0 0 #0c0c14;
+            background-color: #161625;
+            margin: 8px;
+        }
+
+        .pixel-btn {
+            position: relative;
+            background-color: #ff007f;
+            color: #ffffff;
+            font-family: 'Press Start 2P', monospace;
+            box-shadow: 
+                -2px 0 0 0 #ffffff,
+                2px 0 0 0 #ffffff,
+                0 -2px 0 0 #ffffff,
+                0 2px 0 0 #ffffff,
+                -4px 0 0 0 #000000,
+                4px 0 0 0 #000000,
+                0 -4px 0 0 #000000,
+                0 4px 0 0 #000000;
+            transition: transform 0.1s ease;
+        }
+
+        .pixel-btn:hover {
+            background-color: #ffe600;
+            color: #0c0c14;
+        }
+
+        .pixel-btn:active {
+            transform: translate(2px, 2px);
+        }
+
+        .pixel-badge {
+            display: inline-block;
+            border: 2px solid #00ffff;
+            background-color: rgba(0, 255, 255, 0.1);
+            padding: 4px 8px;
+            font-family: 'VT323', monospace;
+            font-size: 1.25rem;
+        }
+
+        /* CRT Scanlines Overlay */
+        .crt::after {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 999;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        /* Scanline flicker toggleable */
+        .scanlines-on .crt::after {
+            display: block;
+        }
+        .scanlines-off .crt::after {
+            display: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0c0c14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b3b5c;
+            border: 2px solid #161625;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .animate-blink {
+            animation: blink 1s infinite;
+        }
+    </style>
+</head>
+<body class="crt font-vt scanlines-on selection:bg-retro-neonPink selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-retro-bg/95 border-b-4 border-retro-border py-4 px-6 backdrop-blur">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-retro-neonGreen animate-pulse pixel-badge flex items-center justify-center text-black font-bold">P</div>
+                <h1 class="font-pixel text-xs sm:text-sm text-retro-neonGreen tracking-widest">&lt;PLAYER_ONE&gt;</h1>
+            </div>
+            <nav class="flex flex-wrap justify-center gap-4 text-lg font-pixel text-retro-neonCyan">
+                <a href="#about" class="hover:text-retro-neonYellow transition-colors">[BIO]</a>
+                <a href="#education" class="hover:text-retro-neonYellow transition-colors">[EDU]</a>
+                <a href="#skills" class="hover:text-retro-neonYellow transition-colors">[SKILLS]</a>
+                <a href="#projects" class="hover:text-retro-neonYellow transition-colors">[QUESTS]</a>
+                <a href="#terminal" class="hover:text-retro-neonYellow transition-colors">[TERM]</a>
+                 <a href="form_login.php" class="hover:text-retro-neonYellow transition-colors">[LOGIN]</a>
+            </nav>
+            <div class="flex items-center gap-2">
+                <button id="audioToggle" onclick="toggleAudio()" class="pixel-btn text-xs px-3 py-1 cursor-pointer">
+                    <i class="fa-solid fa-volume-high"></i> SFX: <span id="sfxStatus">OFF</span>
+                </button>
+                <button id="crtToggle" onclick="toggleCRT()" class="pixel-btn text-xs px-3 py-1 bg-retro-purple cursor-pointer">
+                    CRT: <span id="crtStatus">ON</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-10 space-y-20">
+        
+        <section id="about" class="pixel-box p-6 md:p-10 my-6 bg-retro-card">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                <!-- Retro Pixel Avatar Sprite Simulation -->
+                <div class="flex flex-col items-center justify-center">
+                    <div class="relative w-40 h-40 bg-retro-bg border-4 border-retro-neonCyan flex items-center justify-center shadow-[0_0_15px_rgba(0,255,255,0.4)]">
+                        <!-- CSS Art Pixel Character -->
+                        <div class="text-6xl animate-bounce">🧙‍♂️</div>
+                        <div class="absolute bottom-1 right-1 bg-retro-neonGreen text-black text-xs font-pixel px-1">LV.99</div>
+                    </div>
+                    <span class="mt-4 font-pixel text-xs text-retro-neonYellow animate-blink">PRESS START TO PLAY</span>
+                </div>
+
+                <!-- Biodata Information -->
+                <div class="md:col-span-2 space-y-4">
+                    <div class="inline-block bg-retro-neonPink text-black font-pixel text-xs px-2 py-1 mb-2">FULLSTACK ARCADE DEV</div>
+                    <h2 class="text-3xl md:text-5xl font-pixel text-retro-neonGreen leading-tight">RAHMAT HIDAYAT</h2>
+                    <p class="text-xl md:text-2xl text-gray-300 leading-relaxed font-vt">
+                        Seorang pengembang web berdedikasi tinggi yang mengubah barisan kode menjadi pengalaman game dan web interaktif bergaya 8-bit. Berbasis di Indonesia, siap menaklukkan bug level tinggi!
+                    </p>
+                    
+                    <!-- Stats Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t-2 border-retro-border text-lg">
+                        <div>
+                            <span class="text-retro-neonCyan block font-pixel text-xs">CLASS</span>
+                            <span class="text-white">Software Wizard</span>
+                        </div>
+                        <div>
+                            <span class="text-retro-neonCyan block font-pixel text-xs">EXP</span>
+                            <span class="text-white">5+ Years Quest</span>
+                        </div>
+                        <div>
+                            <span class="text-retro-neonCyan block font-pixel text-xs">LOCATION</span>
+                            <span class="text-white">ID / Samarinda</span>
+                        </div>
+                    </div>
+
+                    <!-- Social / Contact Pixel Buttons -->
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="https://github.com" target="_blank" class="pixel-btn px-4 py-2 text-xs flex items-center gap-2">
+                            <i class="fa-brands fa-github"></i> GITHUB
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="pixel-btn px-4 py-2 text-xs bg-retro-neonCyan text-black flex items-center gap-2">
+                            <i class="fa-brands fa-linkedin"></i> LINKEDIN
+                        </a>
+                        <a href="mailto:player@retrocode.id" class="pixel-btn px-4 py-2 text-xs bg-retro-neonYellow text-black flex items-center gap-2">
+                            <i class="fa-solid fa-envelope"></i> EMAIL
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="space-y-6">
+            <div class="flex items-center gap-4">
+                <div class="h-4 w-4 bg-retro-neonYellow animate-ping"></div>
+                <h3 class="font-pixel text-xl md:text-2xl text-retro-neonYellow">&gt; JENJANG_PENDIDIKAN.LOG</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Education Card 1 -->
+                <div class="pixel-box p-6 bg-retro-card relative border-l-4 border-retro-neonGreen">
+                    <span class="absolute top-4 right-4 text-retro-neonGreen font-pixel text-xs">2020 - 2024</span>
+                    <h4 class="font-pixel text-sm text-retro-neonGreen mb-2 mt-4">SARJANA ILMU KOMPUTER</h4>
+                    <p class="text-retro-neonCyan text-lg mb-2">Universitas Mulawarman</p>
+                    <p class="text-gray-300 text-lg">Fokus pada Rekayasa Perangkat Lunak, Algoritma Grafika Komputer, dan Pengembangan Web Interaktif.</p>
+                </div>
+
+                <!-- Education Card 2 -->
+                <div class="pixel-box p-6 bg-retro-card relative border-l-4 border-retro-neonCyan">
+                    <span class="absolute top-4 right-4 text-retro-neonCyan font-pixel text-xs">2017 - 2020</span>
+                    <h4 class="font-pixel text-sm text-retro-neonCyan mb-2 mt-4">SMA NEGERI 1</h4>
+                    <p class="text-retro-neonYellow text-lg mb-2">Jurusan MIPA</p>
+                    <p class="text-gray-300 text-lg">Juara 1 Lomba Pemrograman Tingkat Sekolah dan aktif di klub ekstrakurikuler komputer.</p>
+                </div>
+
+                <!-- Education Card 3 -->
+                <div class="pixel-box p-6 bg-retro-card relative border-l-4 border-retro-neonPink">
+                    <span class="absolute top-4 right-4 text-retro-neonPink font-pixel text-xs">2014 - 2017</span>
+                    <h4 class="font-pixel text-sm text-retro-neonPink mb-2 mt-4">SMP NEGERI 1</h4>
+                    <p class="text-retro-neonGreen text-lg mb-2">Pendidikan Menengah</p>
+                    <p class="text-gray-300 text-lg">Mulai mempelajari dasar-dasar HTML, logika pemrograman dasar, dan desain retro pixel art.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="space-y-6">
+            <div class="flex items-center gap-4">
+                <div class="h-4 w-4 bg-retro-neonCyan animate-ping"></div>
+                <h3 class="font-pixel text-xl md:text-2xl text-retro-neonCyan">&gt; INVENTORY_SKILLS.DAT</h3>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Skill Item 1 -->
+                <div class="pixel-box p-5 bg-retro-card text-center space-y-3">
+                    <div class="text-4xl">⚡</div>
+                    <h4 class="font-pixel text-xs text-retro-neonYellow">FRONTEND POWER</h4>
+                    <p class="text-gray-300 text-lg">HTML5, CSS3, Tailwind, JavaScript (ES6+), React.js</p>
+                    <div class="w-full bg-retro-bg h-3 border border-retro-border p-0.5">
+                        <div class="bg-retro-neonGreen h-full w-[90%]"></div>
+                    </div>
+                </div>
+
+                <!-- Skill Item 2 -->
+                <div class="pixel-box p-5 bg-retro-card text-center space-y-3">
+                    <div class="text-4xl">🛡️</div>
+                    <h4 class="font-pixel text-xs text-retro-neonPink">BACKEND ENGINE</h4>
+                    <p class="text-gray-300 text-lg">Node.js, Express, Python, REST APIs, PostgreSQL</p>
+                    <div class="w-full bg-retro-bg h-3 border border-retro-border p-0.5">
+                        <div class="bg-retro-neonPink h-full w-[80%]"></div>
+                    </div>
+                </div>
+
+                <!-- Skill Item 3 -->
+                <div class="pixel-box p-5 bg-retro-card text-center space-y-3">
+                    <div class="text-4xl">🕹️</div>
+                    <h4 class="font-pixel text-xs text-retro-neonCyan">RETRO DESIGN</h4>
+                    <p class="text-gray-300 text-lg">Pixel Art, Aseprite, UI/UX Arcade, Figma, CSS Animations</p>
+                    <div class="w-full bg-retro-bg h-3 border border-retro-border p-0.5">
+                        <div class="bg-retro-neonCyan h-full w-[85%]"></div>
+                    </div>
+                </div>
+
+                <!-- Skill Item 4 -->
+                <div class="pixel-box p-5 bg-retro-card text-center space-y-3">
+                    <div class="text-4xl">🔮</div>
+                    <h4 class="font-pixel text-xs text-retro-neonYellow">TOOLS & GIT</h4>
+                    <p class="text-gray-300 text-lg">Git, GitHub Actions, VS Code, Linux Terminal, Docker</p>
+                    <div class="w-full bg-retro-bg h-3 border border-retro-border p-0.5">
+                        <div class="bg-retro-neonYellow h-full w-[75%]"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="space-y-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="h-4 w-4 bg-retro-neonPink animate-ping"></div>
+                    <h3 class="font-pixel text-xl md:text-2xl text-retro-neonPink">&gt; PROJECT_QUESTS.DIR</h3>
+                </div>
+                <!-- Filter buttons -->
+                <div class="flex gap-2 font-pixel text-xs">
+                    <button onclick="filterProjects('all')" class="pixel-btn px-3 py-1 bg-retro-neonGreen text-black">ALL</button>
+                    <button onclick="filterProjects('web')" class="pixel-btn px-3 py-1">WEB</button>
+                    <button onclick="filterProjects('game')" class="pixel-btn px-3 py-1">GAME</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="projectGrid">
+                <!-- Project Card 1 -->
+                <div class="pixel-box p-5 bg-retro-card flex flex-col justify-between project-card" data-category="web">
+                    <div>
+                        <div class="h-36 bg-retro-bg border-2 border-retro-neonCyan flex items-center justify-center text-4xl mb-4 relative overflow-hidden group">
+                            <span class="group-hover:scale-125 transition-transform">🕹️</span>
+                            <div class="absolute bottom-0 inset-x-0 bg-retro-neonCyan/20 text-retro-neonCyan text-xs font-pixel p-1 text-center">QUEST #01</div>
+                        </div>
+                        <h4 class="font-pixel text-sm text-retro-neonGreen mb-2">ARCADE DASHBOARD E-COMMERCE</h4>
+                        <p class="text-gray-300 text-lg mb-4">Platform toko online dengan tema retro 8-bit, sistem keranjang belanja instan, dan integrasi pembayaran simulasi.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-retro-border">
+                        <span class="pixel-badge text-xs text-retro-neonCyan">React / Tailwind</span>
+                        <button onclick="openProjectModal('Arcade E-Commerce', 'Platform e-commerce dengan nuansa arcade klasik lengkap dengan efek suara 8-bit dan keranjang belanja interaktif.', 'https://github.com')" class="pixel-btn text-xs px-3 py-1">INFO</button>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="pixel-box p-5 bg-retro-card flex flex-col justify-between project-card" data-category="game">
+                    <div>
+                        <div class="h-36 bg-retro-bg border-2 border-retro-neonYellow flex items-center justify-center text-4xl mb-4 relative overflow-hidden group">
+                            <span class="group-hover:scale-125 transition-transform">👾</span>
+                            <div class="absolute bottom-0 inset-x-0 bg-retro-neonYellow/20 text-retro-neonYellow text-xs font-pixel p-1 text-center">QUEST #02</div>
+                        </div>
+                        <h4 class="font-pixel text-sm text-retro-neonYellow mb-2">PIXEL SPACE INVADER 2D</h4>
+                        <p class="text-gray-300 text-lg mb-4">Game tembak-tembakan luar angkasa klasik berbasis HTML5 Canvas dengan sistem skor tinggi dan efek ledakan retro.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-retro-border">
+                        <span class="pixel-badge text-xs text-retro-neonYellow">HTML5 Canvas / JS</span>
+                        <button onclick="openProjectModal('Pixel Space Invader 2D', 'Mini game arcade klasik yang dibangun langsung menggunakan HTML5 Canvas API murni tanpa framework eksternal.', 'https://github.com')" class="pixel-btn text-xs px-3 py-1">INFO</button>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="pixel-box p-5 bg-retro-card flex flex-col justify-between project-card" data-category="web">
+                    <div>
+                        <div class="h-36 bg-retro-bg border-2 border-retro-neonPink flex items-center justify-center text-4xl mb-4 relative overflow-hidden group">
+                            <span class="group-hover:scale-125 transition-transform">📜</span>
+                            <div class="absolute bottom-0 inset-x-0 bg-retro-neonPink/20 text-retro-neonPink text-xs font-pixel p-1 text-center">QUEST #03</div>
+                        </div>
+                        <h4 class="font-pixel text-sm text-retro-neonPink mb-2">CYBERPUNK TASK MANAGER</h4>
+                        <p class="text-gray-300 text-lg mb-4">Aplikasi manajemen tugas bergaya terminal hacker dengan fitur drag-and-drop dan penyimpanan local storage.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-retro-border">
+                        <span class="pixel-badge text-xs text-retro-neonPink">JavaScript / CSS</span>
+                        <button onclick="openProjectModal('Cyberpunk Task Manager', 'Aplikasi manajemen tugas harian yang terinspirasi dari antarmuka terminal cyberpunk tahun 90-an.', 'https://github.com')" class="pixel-btn text-xs px-3 py-1">INFO</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="terminal" class="space-y-6">
+            <div class="flex items-center gap-4">
+                <div class="h-4 w-4 bg-retro-neonGreen animate-ping"></div>
+                <h3 class="font-pixel text-xl md:text-2xl text-retro-neonGreen">&gt; RETRO_TERMINAL.EXE</h3>
+            </div>
+
+            <div class="pixel-box p-4 md:p-6 bg-black font-vt text-retro-neonGreen text-xl rounded-none shadow-2xl border-4 border-retro-neonGreen">
+                <div class="flex items-center justify-between pb-3 mb-3 border-b border-retro-neonGreen/30 text-xs font-pixel">
+                    <span>SYS_TERMINAL v1.0.4</span>
+                    <span class="text-retro-neonYellow">TYPE 'help' FOR COMMANDS</span>
+                </div>
+                <div id="terminalOutput" class="space-y-2 max-h-60 overflow-y-auto mb-4">
+                    <p class="text-retro-neonCyan">&gt; Selamat datang di terminal interaktif Rahmat Hidayat!</p>
+                    <p class="text-gray-400">&gt; Ketik perintah di bawah ini untuk berinteraksi dengan sistem.</p>
+                </div>
+                <div class="flex items-center gap-2 pt-2 border-t border-retro-neonGreen/30">
+                    <span class="text-retro-neonYellow font-pixel text-xs">&gt;</span>
+                    <input type="text" id="terminalInput" onkeydown="handleTerminalCommand(event)" placeholder="Ketik perintah (help, bio, skills, clear, reward)..." class="w-full bg-transparent border-none outline-none text-retro-neonGreen font-vt text-xl placeholder-retro-neonGreen/40">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-5xl mx-auto px-4 py-10 mt-20 border-t-4 border-retro-border text-center font-pixel text-xs text-gray-400 space-y-4">
+        <p>&copy; 2026 RAHMAT HIDAYAT. ALL RIGHTS RESERVED.</p>
+        <p class="text-retro-neonCyan">POWERED BY PIXEL ART &amp; NOSTALGIA</p>
+    </footer>
+
+    <div id="projectModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4">
+        <div class="pixel-box bg-retro-card p-6 max-w-lg w-full space-y-4 relative border-4 border-retro-neonGreen">
+            <button onclick="closeProjectModal()" class="absolute top-3 right-3 text-retro-neonPink font-pixel text-sm hover:text-white">[X]</button>
+            <h3 id="modalTitle" class="font-pixel text-lg text-retro-neonGreen">PROJECT TITLE</h3>
+            <p id="modalDesc" class="text-gray-300 text-xl font-vt"></p>
+            <div class="pt-4 flex justify-end gap-4">
+                <a id="modalLink" href="#" target="_blank" class="pixel-btn px-4 py-2 text-xs bg-retro-neonGreen text-black">KUNJUNGI REPO</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+   
+    </script>
+</body>
+</html>
